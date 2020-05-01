@@ -8,8 +8,13 @@ agenum = int(age)
 
 if agenum > 26:
     print("不合适")
-elif agenum < 20:
+elif agenum < 18:
+    print("未成年保护法")
+elif agenum < 16:
     print("不合适")
+elif agenum < 14:
+    print("会坐牢的")
 else:
     print("要微信")
     
+
