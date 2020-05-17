@@ -1,3 +1,7 @@
+import xlrd
+import math
+
+
 stuInfos = [
     {'学号': 126541, '年级': 1, '班级': 12, '性别': '男', '语文': 87, '数学': 76, '英语': 83, '思品': 65},
     {'学号': 133291, '年级': 1, '班级': 12, '性别': '男', '语文': 45, '数学': 97, '英语': 83, '思品': 83},
@@ -34,8 +38,43 @@ stuInfos = [
 
 #  如上有一部分学生的信息，请从给定的学生信息中用python实现以下功能
 #  1. 计算每个学生的总成绩 计算方式： 语文 + 数学 + 英语 + 思品 = 总成绩
+# for rowindex in range(0, len(stuInfos)):
+# totalsub1=0
+for item in stuInfos:
+    sub1=item.get("语文")
+    sub2=item.get("数学")
+    sub3 = item.get("英语")
+    sub4=item.get("思品")
+    totalScore=sub1+sub2+sub3+sub4
+    # print(sub1)
+    # print(sub2)
+    # print(sub3)
+    print("the total score for each student:"+ str(totalScore))
 #  2. 计算所有人各科平均成绩，如：语文平均成绩 = 语文总成绩 / 总人数
+def Averagesub (k):
+    totalsub=0
+    for item in stuInfos:
+        sub=item.get(k)
+        totalsub+=sub
+    averageSub=totalsub/len(stuInfos)
+    return averageSub
+
+print("语文的平均成绩："+ str(Averagesub("语文")))
+print("语文的平均成绩："+ str(Averagesub("数学")))
+print("语文的平均成绩："+ str(Averagesub("英语")))
+print("语文的平均成绩："+ str(Averagesub("思品")))
+
+
+
 #  3. 计算所有人综合的平均成绩, 计算方式： (语文平均成绩 + 数学平均成绩 + 英语平均成绩 + 思品平均成绩) / 4
+def averageAll (a, b, c, d):
+    averageAll=(a+b+c+d)/4
+    return averageAll
+
+averageFallsub=averageAll(Averagesub("语文"), Averagesub("数学"), Averagesub("英语"), Averagesub("思品"))
+print("the averagescore for all people in all subjects (所有人综合的平均成绩):" + str(averageFallsub))
+
+
 #  4. 计算每个人的绩点：
     #  90分(包含90分)到100之间绩点为 4.0  
     #  80分(包含80分)到90之间绩点为 3.0
@@ -44,6 +83,60 @@ stuInfos = [
     #  60分以下的绩点为0.0
     # 如：数据 {'语文': 87, '数学': 76, '英语': 83, '思品': 65}的绩点计算为：
     # 87分绩点为3.0   76分绩点为2.0  83分绩点为 3.0 65分绩点为1.0，则总绩点为 3.0 + 2.0 + 3.0 + 1.0 = 9.0
-# 5. 计算所有人的平均绩点。 
+
+
+
+def transfer(grade):
+    if 90 <= grade < 100:
+        subpoint=4
+    elif 80<=grade<90:
+        subpoint=3
+    elif 70<=grade<80:
+        subpoint=2
+    elif 60<=grade<70:
+        subpoint=1
+    else:
+        subpoint=0
+    return subpoint
+
+stugrade=0
+for item in stuInfos:
+    subpoint1=transfer(item.get("语文"))
+    subpoint2=transfer(item.get("数学"))
+    subpoint3= transfer(item.get("英语"))
+    subpoint4=transfer(item.get("思品"))
+    totalgrade=subpoint1+subpoint2+subpoint3+subpoint4
+    print("the total grade for each student（每个人的绩点）:"+ str(totalgrade))
+
+# 5. 计算所有人的平均绩点。
+    stugrade += totalgrade
+averageGrade = stugrade/len(stuInfos)
+print("所有人的平均绩点："+str(averageGrade))
+
+
+# def Gradepoint(k):
+#     for item in stuInfos:
+#         grade=item.get(k)
+#         if 90 <= grade < 100:
+#             subpoint=4
+#         elif 80<=grade<90:
+#             subpoint=3
+#         elif 70<=grade<80:
+#             subpoint=2
+#         elif 60<=grade<70:
+#             subpoint=1
+#         else:
+#             subpoint=0
+#     return subpoint
+#
+# Grade1=Gradepoint("语文")
+# Grade2=Gradepoint("数学")
+# Grade3=Gradepoint("英语")
+# Grade4=Gradepoint("思品")
+#
+# gradepoint=Grade1+Grade2+Grade3+Grade4
+# print(gradepoint)
+
+
 
 
